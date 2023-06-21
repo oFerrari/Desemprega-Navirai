@@ -4,10 +4,23 @@
  */
 package br.edu.ifms.DesempregaNavirai.candidato;
 
-/**
- *
- * @author 07180871192
- */
+import java.util.List;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
+
+
 public interface CandidatoMapper {
+    public static final CandidatoMapper INSTANCE = Mappers.getMapper(CandidatoMapper.class);
     
+    public CandidatoDto toDto(Candidato entity);
+    
+    public List<CandidatoDto>map(List<Candidato>itens);
+    
+    @Mapping(target = "id", ignore = true)
+    public void update(CandidatoForm dto, @MappingTarget Candidato entity);
+    
+    @Mapping(target = "id", ignore = true)
+    public Candidato toEntity(CandidatoForm form);
 }

@@ -4,10 +4,12 @@
  */
 package br.edu.ifms.DesempregaNavirai.candidato;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 /**
  *
  * @author 07180871192
  */
-public interface CandidatoRepository {
+public interface CandidatoRepository extends JpaRepository<Candidato, Long>{
     
 }
