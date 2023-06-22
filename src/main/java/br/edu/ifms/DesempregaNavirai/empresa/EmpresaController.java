@@ -2,8 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.edu.ifms.DesempregaNavirai.candidato;
+package br.edu.ifms.DesempregaNavirai.Empresa;
 
+
+import br.edu.ifms.DesempregaNavirai.empresa.Empresa;
+import br.edu.ifms.DesempregaNavirai.empresa.EmpresaDto;
+import br.edu.ifms.DesempregaNavirai.empresa.EmpresaForm;
+import br.edu.ifms.DesempregaNavirai.empresa.EmpresaMapper;
+import br.edu.ifms.DesempregaNavirai.empresa.EmpresaService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +24,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ *
+ * @author 07041626105
+ */
 @RestController
-@RequestMapping("/api/candidato")
-public class CandidatoController {
-
-    @Autowired // faz o Spring criar uma instância de DiciplinaService
-    private CandidatoService service;
-
+@RequestMapping("/api/empresa")
+public class EmpresaController {
+     @Autowired // faz o Spring criar uma instância de DiciplinaService
+    private EmpresaService service;
+    
     @GetMapping
-    public ResponseEntity<List<CandidatoDto>> listar() {
-        List<Candidato> listaEntity = service.listar();
-        List<CandidatoDto> listaDto = CandidatoMapper.INSTANCE.map(listaEntity);
+    public ResponseEntity<List<EmpresaDto>> listar() {
+        List<Empresa> listaEntity = service.listar();
+        List<EmpresaDto> listaDto = EmpresaMapper.INSTANCE.map(listaEntity);
         return ResponseEntity.ok(listaDto);
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<CandidatoDto> cadastrar(
-            @RequestBody @Valid CandidatoForm form) {
-        Candidato entity = CandidatoMapper.INSTANCE.toEntity(form);
+    public ResponseEntity<EmpresaDto> cadastrar(
+            @RequestBody @Valid EmpresaForm form) {
+        Empresa entity = EmpresaMapper.INSTANCE.toEntity(form);
         service.salvar(entity);
-        CandidatoDto dto = CandidatoMapper.INSTANCE.toDto(entity);
+        EmpresaDto dto = EmpresaMapper.INSTANCE.toDto(entity);
         return ResponseEntity.accepted().body(dto);
     }
-
+    
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<CandidatoDto> atualizar(
+    public ResponseEntity<EmpresaDto> atualizar(
             @PathVariable Long id,
-            @RequestBody @Valid CandidatoForm form) {
-        Candidato entity = service.atualizar(id, form);
-        CandidatoDto dto = CandidatoMapper.INSTANCE.toDto(entity);
+            @RequestBody @Valid EmpresaForm form) {
+        Empresa entity = service.atualizar(id, form);
+        EmpresaDto dto = EmpresaMapper.INSTANCE.toDto(entity);
         return ResponseEntity.ok(dto);
     }
-
+    
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> excluir(@PathVariable Long id) {

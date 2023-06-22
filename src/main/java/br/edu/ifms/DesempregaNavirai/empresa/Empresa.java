@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.edu.ifms.DesempregaNavirai.candidato;
+package br.edu.ifms.DesempregaNavirai.empresa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,16 +21,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-public class Candidato implements Serializable{
+public class Empresa implements Serializable{
 
     @Id
     @GeneratedValue
     private int id;
-    private String email;
-    private String nome;
-    private String cpf;
+    private String razaoSocial;
+    private String cnpj;
     private String endereco;
     private String telefone;
+    private String email;
     private String foto;
     private String password;
     
