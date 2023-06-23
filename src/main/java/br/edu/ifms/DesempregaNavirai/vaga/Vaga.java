@@ -25,7 +25,7 @@ public class Vaga implements Serializable{
 
     @Id
     @GeneratedValue
-    private String id;
+    private int id;
     private String cargo;
     private String descricaoVaga;
     private String tipo;
