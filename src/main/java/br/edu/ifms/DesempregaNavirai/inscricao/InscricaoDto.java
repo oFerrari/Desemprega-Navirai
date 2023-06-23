@@ -6,27 +6,24 @@ package br.edu.ifms.DesempregaNavirai.inscricao;
 
 import br.edu.ifms.DesempregaNavirai.candidato.Candidato;
 import br.edu.ifms.DesempregaNavirai.vaga.Vaga;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Data
-@EqualsAndHashCode
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Builder
-public class Inscricao implements Serializable{
-    @EmbeddedId
-    private InscricaoId id;
+
+public class InscricaoDto {
+
     private String caminhoArquivoCurriculo;
     private LocalDateTime horarioInscricao;
     private Vaga vaga;
     private Candidato candidato;
+    
 }

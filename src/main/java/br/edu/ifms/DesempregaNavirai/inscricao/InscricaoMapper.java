@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package br.edu.ifms.DesempregaNavirai.vaga;
+package br.edu.ifms.DesempregaNavirai.inscricao;
 
 import java.util.List;
 import org.mapstruct.Mapper;
@@ -11,16 +11,17 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface VagaMapper {
-    public static final VagaMapper INSTANCE = Mappers.getMapper(VagaMapper.class);
+public interface InscricaoMapper {
+    public static final InscricaoMapper INSTANCE = Mappers.getMapper(InscricaoMapper.class);
     
-    public VagaDto toDto(Vaga entity);
+    public InscricaoDto toDto(Inscricao entity);
     
-    public List<VagaDto>map(List<Vaga>itens);
-    
-    @Mapping(target = "id", ignore = true)
-    public void update(VagaForm dto, @MappingTarget Vaga entity);
+    public List<InscricaoDto>map(List<Inscricao>itens);
     
     @Mapping(target = "id", ignore = true)
-    public Vaga toEntity(VagaForm form);
-}
+    public void update(InscricaoForm dto, @MappingTarget Inscricao entity);
+    
+    @Mapping(target = "id", ignore = true)
+    public Inscricao toEntity(InscricaoForm form);
+}   
+    
