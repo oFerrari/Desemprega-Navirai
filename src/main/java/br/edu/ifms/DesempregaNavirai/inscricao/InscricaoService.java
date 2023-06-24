@@ -19,13 +19,13 @@ public class InscricaoService {
         return p;
     }
     
-    public Inscricao atualizar(Long id, InscricaoForm form) {
+    public Inscricao atualizar(InscricaoId id, InscricaoForm form) {
         Inscricao entity = buscarPorId(id);
         InscricaoMapper.INSTANCE.update(form, entity);
         return entity;
     }
     
-    public Inscricao buscarPorId(Long id) {
+    public Inscricao buscarPorId(InscricaoId id) {
         Optional<Inscricao> optional = repository.findById(id);
         if (optional.isEmpty()) {
             String msg = "Não existe inscricao para o código [%d] informado";
@@ -34,8 +34,12 @@ public class InscricaoService {
         return optional.get();
     }
 
-    public void excluir(Long id) {
+    public void excluir(InscricaoId id) {
         Inscricao entity = buscarPorId(id);
         repository.delete(entity);
+    }
+
+    Object buscarPor(InscricaoId id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

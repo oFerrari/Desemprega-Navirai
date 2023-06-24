@@ -4,7 +4,6 @@
  */
 package br.edu.ifms.DesempregaNavirai.inscricao;
 
-
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/inscricao")
 public class InscricaoController {
-     @Autowired // faz o Spring criar uma instância de DiciplinaService
+
+    @Autowired // faz o Spring criar uma instância de DiciplinaService
     private InscricaoService service;
-    
+
+    @GetMapping("/{idVaga}/{idCandidato}")
+    public InscricaoDto visualizar(@PathVariable int idVaga, @PathVariable int idCandidato) {
+        InscricaoId id = InscricaoId.builder()
+                .candidatoId(idCandidato)
+                .vagaId(idVaga)
+                .build();
+        return InscricaoMapper.INSTANCE
+                .toDto(service
+                        .buscarPorId(id));
+    }
+
     @GetMapping
     public ResponseEntity<List<InscricaoDto>> listar() {
         List<Inscricao> listaEntity = service.listar();
@@ -45,22 +56,21 @@ public class InscricaoController {
         InscricaoDto dto = InscricaoMapper.INSTANCE.toDto(entity);
         return ResponseEntity.accepted().body(dto);
     }
-    
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<InscricaoDto> atualizar(
-            @PathVariable Long id,
+            @PathVariable InscricaoId id,
             @RequestBody @Valid InscricaoForm form) {
         Inscricao entity = service.atualizar(id, form);
         InscricaoDto dto = InscricaoMapper.INSTANCE.toDto(entity);
         return ResponseEntity.ok(dto);
     }
-    
+
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<?> excluir(@PathVariable Long id) {
+    public ResponseEntity<?> excluir(@PathVariable InscricaoId id) {
         service.excluir(id);
         return ResponseEntity.ok().build();
     }
 }
-

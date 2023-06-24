@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author 07180871192
  */
-public interface InscricaoRepository extends JpaRepository<Inscricao, Long>{
+public interface InscricaoRepository extends JpaRepository<Inscricao, InscricaoId>{
     
 }
