@@ -57,19 +57,27 @@ public class InscricaoController {
         return ResponseEntity.accepted().body(dto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{idVaga}/{idCandidato}")
     @Transactional
     public ResponseEntity<InscricaoDto> atualizar(
-            @PathVariable InscricaoId id,
+            @PathVariable int idVaga, @PathVariable int idCandidato,
             @RequestBody @Valid InscricaoForm form) {
+        InscricaoId id = InscricaoId.builder()
+                .candidatoId(idCandidato)
+                .vagaId(idVaga)
+                .build();
         Inscricao entity = service.atualizar(id, form);
         InscricaoDto dto = InscricaoMapper.INSTANCE.toDto(entity);
         return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idVaga}/{idCandidato}")
     @Transactional
-    public ResponseEntity<?> excluir(@PathVariable InscricaoId id) {
+    public ResponseEntity<?> excluir(@PathVariable int idVaga, @PathVariable int idCandidato) {
+        InscricaoId id = InscricaoId.builder()
+                .candidatoId(idCandidato)
+                .vagaId(idVaga)
+                .build();
         service.excluir(id);
         return ResponseEntity.ok().build();
     }
