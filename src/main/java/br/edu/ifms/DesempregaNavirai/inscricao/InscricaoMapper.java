@@ -4,15 +4,20 @@
  */
 package br.edu.ifms.DesempregaNavirai.inscricao;
 
+import br.edu.ifms.DesempregaNavirai.candidato.CandidatoMapper;
+import br.edu.ifms.DesempregaNavirai.vaga.VagaMapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(
+        uses = {VagaMapper.class, CandidatoMapper.class}
+)
 public interface InscricaoMapper {
     public static final InscricaoMapper INSTANCE = Mappers.getMapper(InscricaoMapper.class);
+    
     
     public InscricaoDto toDto(Inscricao entity);
     
@@ -21,7 +26,16 @@ public interface InscricaoMapper {
     @Mapping(target = "id", ignore = true)
     public void update(InscricaoForm dto, @MappingTarget Inscricao entity);
     
-    @Mapping(target = "id", ignore = true)
-    public Inscricao toEntity(InscricaoForm form);
+    @Mapping(target = "id", expression = """
+                                         java(
+                                            InscricaoId.builder()
+                                                    .candidatoId(dto.getCandidato().getId())
+                                                    .vagaId(dto.getVaga().getId())
+                                                    .build()
+                                         )
+                                         """)
+    
+    public Inscricao toEntity(InscricaoForm dto);
+    
 }   
     

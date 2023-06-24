@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class InscricaoId {
     @Column(name = "candidato_id")
-    private Long candidatoId;
+    private int candidatoId;
     
     @Column(name = "vaga_id")
-    private Long vagaId;
+    private int vagaId;
 }
